@@ -15,7 +15,7 @@ const MobileNav = ({ onNavigate, activeComponent }) => {
   return (
     <>
       <nav className="mobile-nav">
-        <span className="mobile-nav-brand">Darren Yu</span>
+        <span className="mobile-nav-brand">Phoebe Royer</span>
         <button 
           onClick={toggleMenu}
           className="mobile-nav-toggle"

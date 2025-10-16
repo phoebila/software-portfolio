@@ -12,6 +12,7 @@ import ProjectCard from './components/ProjectCard';
 import ProjectMenu from './components/ProjectMenu';
 import { projectDetails } from './components/ProjectsData';
 import { experienceData } from './components/ExperienceData';
+import MatrixBackground from './components/MatrixBackground';
 import Home from './components/Home';
 
 // Wrapper component to handle navigation logic
@@ -119,6 +120,7 @@ const AppContent = () => {
 
   return (
     <div className="container">
+      <MatrixBackground />
       <div className="corner-border corner-top-left"></div>
       <div className="corner-border corner-top-right"></div>
       <div className="corner-border corner-bottom-left"></div>
