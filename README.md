@@ -1,10 +1,9 @@
 # Brief Description
 
-This project is a simple portfolio style with a camera and cinema theme. It will show case my past engineering projects and contain informations that users can find useful about me. Currently looking at display ideas. 
+This project is a simple portfolio style a coming soon webpage that was forked from [Yume-02](https://yume-02.github.io/Portfolio/). It was built using React and CSS, and is fully responsive on desktop and mobile devices. The webpage includes a view finder that displays a brief introduction, links to social media profiles, and a contact form.
 
-The site currently needs to be debugged on the mobile-end; non-safari useres are unable to scroll all the way to the bottom of the webpage and lower margin of the view finder, external links, and  are unaccessible because of this.
 
-Link: https://yume-02.github.io/Portfolio/
+Original Forked Link: https://yume-02.github.io/Portfolio/
 
 # Getting Started with Create React App
 
