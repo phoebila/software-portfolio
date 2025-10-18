@@ -20,7 +20,7 @@ const MatrixBackground = () => {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#0F0"; // green text
+      ctx.fillStyle = "rgba(0, 255, 0, 0.27)"; // green text
       ctx.font = fontSize + "px monospace";
 
       drops.forEach((y, i) => {
