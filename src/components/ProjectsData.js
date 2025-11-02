@@ -45,15 +45,16 @@ export const projectDetails = {
      imageUrl: process.env.PUBLIC_URL + "/cse160.png",
      githubUrl: "https://github.com/phoebila/169-Page"
    },
- spinningRecord: {
-     id: "spinningRecord",
-     title: "Spinning Record - Spotify Integration",
-     date: "Dec.2024",
-     category: "Portfolio",
-     type: "Dev",
-     description: "Created an interactive record turntable that syncs with Spotify to display the currently playing track’s album art in real time. Implemented OAuth authentication, periodically fetched playback data via the Spotify Web API, and dynamically updated the UI with animated record visuals for a seamless, engaging music experience.",
-     skills: ["JavaScript", "HTML", "CSS", "Spotify API", "OAuth", "Web Development"],
-     imageUrl: process.env.PUBLIC_URL + "/spinningRecord.png",
-     githubUrl: "https://github.com/phoebila/Spinning-Record"
-   }
+   forkCast: {
+      id: "forkCast",
+      title: "ForkCast - Weekly Meal Planner",
+      date: "Oct.2025",
+      category: "Portfolio",
+      type: "Dev",
+      description: "Developed a weekly meal planning app that allows users to input ingredients in their fridge and generate meal ideas. Implemented a responsive UI with React, integrated with the Spoonacular API for recipe data and summarization for a 7 day meal plan.",
+      skills: ["JavaScript", "React", "Redux", "CSS", "Spoonacular API"],
+      imageUrl: process.env.PUBLIC_URL + "/image.png",
+      githubUrl: "https://github.com/phoebila/paystand-ai-food-bot"
+   },
+   
 };
