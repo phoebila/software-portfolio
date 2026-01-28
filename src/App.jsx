@@ -5,7 +5,6 @@ import FisheyeName from './components/FisheyeName';
 import Dock from './components/Dock';
 import LogoLoop from './components/LogoLoop';
 import About from './components/About';
-import Experience from './components/Experience';
 import ExperienceMenu from './components/ExperienceMenu';
 import ExperienceCard from './components/ExperienceCard';
 import ProjectCard from './components/ProjectCard';
