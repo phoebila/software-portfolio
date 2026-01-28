@@ -85,6 +85,11 @@
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Ensure SVG icons inside nodes pass clicks to the parent link */
+.logoloop__node svg {
+  pointer-events: none;
+}
+
 .logoloop--scale-hover .logoloop__item {
   overflow: visible;
 }

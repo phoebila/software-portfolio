@@ -62,6 +62,9 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
   const offsetRef = useRef(0);
   const velocityRef = useRef(0);
 
+  // Threshold below which we consider velocity to be effectively zero
+  const VELOCITY_THRESHOLD = 0.5;
+
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
@@ -76,6 +79,13 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
       track.style.transform = transformValue;
     }
 
+    const stopAnimation = () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+
     const animate = timestamp => {
       if (lastTimestampRef.current === null) {
         lastTimestampRef.current = timestamp;
@@ -88,6 +98,17 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
 
       const easingFactor = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.SMOOTH_TAU);
       velocityRef.current += (target - velocityRef.current) * easingFactor;
+
+      // Snap velocity to target when very close
+      if (Math.abs(velocityRef.current - target) < VELOCITY_THRESHOLD) {
+        velocityRef.current = target;
+      }
+
+      // Stop animation loop when paused and at rest (makes elements stable for clicking)
+      if (target === 0 && Math.abs(velocityRef.current) < VELOCITY_THRESHOLD) {
+        stopAnimation();
+        return;
+      }
 
       if (seqSize > 0) {
         let nextOffset = offsetRef.current + velocityRef.current * deltaTime;
@@ -103,13 +124,14 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    rafRef.current = requestAnimationFrame(animate);
+    // Start animation
+    const target = isHovered && hoverSpeed !== undefined ? hoverSpeed : targetVelocity;
+    if (target !== 0 || Math.abs(velocityRef.current) >= VELOCITY_THRESHOLD) {
+      rafRef.current = requestAnimationFrame(animate);
+    }
 
     return () => {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
+      stopAnimation();
       lastTimestampRef.current = null;
     };
   }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical, trackRef]);

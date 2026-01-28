@@ -15,6 +15,7 @@ const Dock = ({ items, activeItem, onNavigate, isLanding = false }) => {
         top: isLanding ? 'calc(50% + 120px)' : '50%',
         left: isLanding ? '50%' : '20px',
         transform: isLanding ? 'translateX(-50%)' : 'translateY(-50%)',
+        pointerEvents: 'none', // Allow clicks to pass through to social icons below
       }}
     >
       <motion.div 
@@ -31,6 +32,7 @@ const Dock = ({ items, activeItem, onNavigate, isLanding = false }) => {
           borderRadius: '4px',
           border: '1px solid rgba(0, 255, 255, 0.2)',
           boxShadow: '0 0 20px rgba(0, 255, 255, 0.1), inset 0 0 30px rgba(0, 0, 0, 0.3)',
+          pointerEvents: 'auto', // Re-enable clicks on the dock buttons
         }}
         transition={{ duration: 0.4, ease: 'easeInOut' }}
       >
