@@ -3,35 +3,131 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline: none;
 }
 
-/* * { background: #f001 !important } */
+*:focus {
+  outline: none;
+}
 
 *::-webkit-scrollbar {
   display: none;  /* Chrome, Safari and Opera */
 }
 
+html, body {
+  border: none;
+  outline: none;
+}
+
 body {
   background-color: #000;
   color: #fff;
-  font-family: "Kumbh Sans", serif;
-  font-optical-sizing: auto;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
   font-weight: 400;
   font-style: normal;
-  font-variation-settings:"YOPQ" 300;
+  letter-spacing: 0.02em;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
+  overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  body {
-    overflow: hidden;
-  }
+/* CRT Overlay Effect */
+.app-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
 }
 
+/* Vignette effect */
+.app-container::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* New App Container */
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.content-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.content-wrapper.fade-out {
+  opacity: 0;
+}
+
+.content-wrapper.fade-in {
+  opacity: 1;
+}
+
+.back-button {
+  color: #00ffff;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-family: monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background-color: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.back-button:hover {
+  background-color: rgba(0, 255, 255, 0.15);
+  border-color: rgba(0, 255, 255, 0.6);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+/* Legacy container - keep for compatibility */
 .container {
   width: 90vw;
   height: 90vh;
@@ -561,49 +657,7 @@ body {
 }
 
 
-.projects-menu {
-  position: absolute;
-  top: 50%;
-  right: -38%;
-  transform: translateY(-50%);
-  text-align: right;
-  background-color: transparent;
-  width: 40%; 
-  max-width: 25rem; /* Prevent excessive width on large screens */
-}
-  
-.projects-menu :hover{
-  color: #888;
-  font-size: 2.2rem;
-  transition-timing-function: ease-in;
-  transition: 0.3s;
-  }
-  
-  .projects-menu h2 {
-  font-size: 2rem;
-  font-weight: normal;
-  margin-top: .5rem;
-  transition: opacity 0.3s ease;
-}
-  
-.projects-menu .group {
-  margin-bottom: 2rem;
-}
-  
-.projects-menu .group:hover h2 {
-  opacity: 0.7;
-}
-  
-.projects-menu .group:active h2 {
-  font-size: 3rem;
-  color: #fff;
-  transition: font-size 0.3s;
-}
-  
-.projects-menu .text-sm {
-  font-size: 0.875rem;
-  color: #bbb;
-}
+/* Projects menu - styles removed, using inline styles now */
   
 .projects-grid {
   display: grid;
@@ -615,37 +669,90 @@ body {
   
   /* Project Card */
 .project-card {
-  background-color: #000;
-  border: 1px solid rgba(255, 255, 255, 0.1 );
-  border-radius: 8px;
+  background-color: rgba(0, 20, 30, 0.8);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 4px;
   overflow: hidden;
-  transition: transform 0.3s ease;
-  margin: 5rem;
+  transition: all 0.3s ease;
+  margin: 0;
+  max-width: 450px;
+}
+
+.project-card:hover {
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
 }
   
 .project-image {
   width: 100%;
-  height: auto;
+  height: 200px;
   object-fit: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
 }
   
 .project-content {
-  padding: 1.5rem;
+  padding: 1.25rem;
 }
   
 .project-title {
-  font-size: 2rem;
-  color: #fff;
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  color: #00ffff;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  letter-spacing: 0.05em;
 }
   
 .project-description {
-  color: #bbb;
-  font-size: 1rem;
-  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  line-height: 1.7;
   margin-bottom: 1rem;
+}
+
+.skills-container {
+  margin-bottom: 1rem;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  font-size: 0.7rem;
+  padding: 0.3rem 0.6rem;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 2px;
+  color: rgba(0, 255, 255, 0.9);
+  letter-spacing: 0.05em;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.project-link {
+  font-size: 0.8rem;
+  color: rgba(0, 255, 255, 0.9);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.project-link:hover {
+  background: rgba(0, 255, 255, 0.1);
+  border-color: rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
 }
   
 /* Target the back button using existing classes */
@@ -690,13 +797,13 @@ body {
 }
 
 .experience-card {
-  background-color: rgba(20, 20, 20, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  background: rgba(0, 20, 30, 0.8);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 4px;
   overflow: hidden;
   transition: transform 0.3s ease, border-color 0.3s ease;
   margin-bottom: 1.5rem;
-  margin: 5rem;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
 }
 
 @media (max-width: 768px) {
@@ -716,80 +823,97 @@ body {
 }
 
 .experience-title {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 0.75rem;
-  color: #fff;
+  margin-bottom: 0.5rem;
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  letter-spacing: 0.05em;
 }
 
 .experience-company-location {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: #b8b8b8;
-  padding-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  padding-bottom: 0.5rem;
 }
 
 .experience-date {
-  font-size: 1.2rem;
-  color: #999999;
+  font-size: 0.9rem;
+  color: rgba(0, 255, 255, 0.7);
   padding-bottom: 1rem;
+  letter-spacing: 0.1em;
 }
 
 .experience-description {
-  color: #dddddd;
-  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
   line-height: 1.7;
   margin-bottom: 1.25rem;
 }
 
 .experience-section-title {
-  color: #ffffff;
+  color: #00ffff;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .experience-list {
-  list-style-type: disc;
-  padding-left: 1.5rem;
+  list-style-type: none;
+  padding-left: 0;
   margin-bottom: 1rem;
   padding-top: .5rem;
 }
 
 .experience-list-item {
-  color: #cccccc;
-  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
   line-height: 1.6;
-  margin-bottom: 0rem;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.experience-list-item::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: rgba(0, 255, 255, 0.6);
 }
 
 .experience-skills-container {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  padding: 1.25rem;
+  background-color: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 1rem;
   margin-top: 1.5rem;
 }
 
 .experience-skills-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .experience-skill-tag {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  padding: 0.3rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
+  background-color: transparent;
+  color: rgba(0, 255, 255, 0.8);
+  padding: 0.25rem 0.75rem;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  font-size: 0.8rem;
   font-weight: 500;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.2s ease;
+  letter-spacing: 0.05em;
 }
 
 .experience-skill-tag:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-  transform: scale(1.05);
+  background-color: rgba(0, 255, 255, 0.1);
+  border-color: rgba(0, 255, 255, 0.5);
 }
 
 /* Skills Container */
@@ -916,98 +1040,7 @@ body {
   padding-top: 3.7rem; /* Adjust as needed */
 }
 
-.experience-menu {
-  position: absolute;
-  top: 50%;
-  right: -38%;
-  transform: translateY(-50%);
-  text-align: right;
-  background-color: transparent;
-  width: 40%; 
-  max-width: 25rem;
-  max-height: 75vh; /* Limit to 65% of viewport height */
-  overflow-y: auto; /* Make it scrollable */
-  padding: 2rem 0; /* Add padding to top and bottom */
-}
-
-/* Add a custom scrollbar styling for better aesthetics */
-.experience-menu::-webkit-scrollbar {
-  width: 5px;
-  display: block; /* Override the general scrollbar hiding */
-  display: none;  /* Chrome, Safari and Opera */
-}
-
-.experience-menu::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-}
-
-.experience-menu::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-}
-
-.experience-menu::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-  
-.experience-menu :hover{
-  color: #888;
-  font-size: 2.2rem;
-  transition-timing-function: ease-in;
-  transition: 0.3s;
-  }
-  
-.experience-menu h2 {
-  font-size: 2rem;
-  font-weight: normal;
-  margin-top: .5rem;
-  transition: opacity 0.3s ease;
-}
-  
-.experience-menu .group {
-  margin-bottom: 2rem;
-}
-  
-.experience-menu .group:hover h2 {
-  opacity: 0.7;
-}
-  
-.experience-menu .group:active h2 {
-  font-size: 3rem;
-  color: #fff;
-  transition: font-size 0.3s;
-}
-  
-.experience-menu .text-sm {
-  font-size: 0.875rem;
-  color: #bbb;
-}
-  
-.experience-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
-  gap: 2rem;
-  width: 100%;
-  padding: 1rem;
-}
-
-
-@media (max-width: 1600px) {
-  .experience-menu h2{
-    width: 100%;
-    right: 0%;
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-
-  .experience-menu :hover{
-    color: #888;
-    font-size: 1.5rem;
-    transition-timing-function: ease-in;
-    transition: 0.3s;
-    }
-}
+/* Experience menu styles handled by inline styles in ExperienceMenu.jsx */
 
 /* Media queries for responsive grid lines */
 @media (max-width: 768px) {
@@ -1222,13 +1255,7 @@ body {
     padding-bottom: 1rem;
   }
 
-  .projects-menu {
-    width: 100%;
-    right: 0%;
-    max-height: 75vh; /* Limit to 65% of viewport height */
-    overflow-y: auto; /* Make it scrollable */
-    padding: 2rem 0; /* Add padding to top and bottom */
-  }
+  /* projects-menu responsive styles removed */
 
   .project-content {
     padding: 1.5rem;

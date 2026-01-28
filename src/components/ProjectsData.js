@@ -20,6 +20,7 @@ export const projectDetails = {
    description: "Developed real-time interactive 3D scenes using OpenGL, implementing custom vertex and fragment shaders, dynamic lighting, and transformation matrices to create visually engaging graphics without external engines.",
    skills: ["OpenGL", "C++", "GLSL", "3D Modeling", "Shader Development"],
    imageUrl: process.env.PUBLIC_URL + "/computerGraphics.png",
+   embedUrl: "https://phoebila.github.io/ComputerGraphicsCSE160/asgn4/asgn4.html",
    alt:"Joe",
    githubUrl: "https://github.com/phoebila/ComputerGraphicsCSE160"
  },
@@ -43,6 +44,7 @@ export const projectDetails = {
      description: "Explored interactive graphics and generative art using p5.js, creating dynamic visualizations and animations while applying principles of programming, design, and user interaction.",
      skills: ["p5.js", "JavaScript", "HTML", "CSS"],
      imageUrl: process.env.PUBLIC_URL + "/cse160.png",
+     embedUrl: "https://phoebila.github.io/169-Page/experiment5/index.html",
      githubUrl: "https://github.com/phoebila/169-Page"
    },
    forkCast: {

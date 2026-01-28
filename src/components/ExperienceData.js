@@ -1,4 +1,20 @@
   export const experienceData = {
+    "paystand_ml": {
+      id: "paystand_ml",
+      title: "AI/ML Engineer",
+      company: "Paystand",
+      location: "Santa Cruz, CA",
+      date: "Oct 2025 - Present",
+      type: "Software Engineering & ML",
+      description: "Building full-stack software solutions and machine learning systems for a B2B payments platform. Designing and implementing backend services, APIs, and data pipelines while developing AI-powered features to automate financial workflows and enhance product capabilities.",
+      skills: ["Python", "Elixir", "Machine Learning", "Cursor AI", "PostgreSQL", "AWS", "Docker"],
+      achievements: [
+        "Developing end-to-end software features from design to deployment, contributing to core payment processing systems.",
+        "Building and integrating ML models to automate accounts receivable workflows and improve transaction accuracy.",
+        "Designing RESTful APIs and backend services to support scalable fintech applications.",
+        "Collaborating with product and engineering teams to deliver AI-driven solutions that enhance user experience."
+      ]
+    },
     "it_specialist": {
       id: "it_specialist",
       title: "IT Specialist",

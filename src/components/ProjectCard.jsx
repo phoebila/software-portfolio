@@ -1,17 +1,32 @@
 import React from 'react';
-import { projectDetails } from './ProjectsData';
 
 const ProjectCard = ({ 
   title, 
   description, 
   skills = [], 
   imageUrl,
+  embedUrl,
   projectUrl,
   githubUrl 
 }) => {
   return (
     <div className="project-card">
-      {imageUrl && (
+      {embedUrl ? (
+        <div className="project-embed">
+          <iframe
+            src={embedUrl}
+            title={title}
+            style={{
+              width: '100%',
+              height: '300px',
+              border: 'none',
+              borderRadius: '4px 4px 0 0',
+            }}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      ) : imageUrl && (
         <img 
           src={imageUrl} 
           alt={title} 
@@ -34,6 +49,16 @@ const ProjectCard = ({
         </div>
 
         <div className="project-links">
+          {embedUrl && (
+            <a 
+              href={embedUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link"
+            >
+              Open Full Screen
+            </a>
+          )}
           {projectUrl && (
             <a 
               href={projectUrl}
